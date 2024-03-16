@@ -1,0 +1,14 @@
+POST http://localhost:8090/id-card/encrypt HTTP/2
+content-type: application/json
+
+{
+  "id_card_no": "1100214356753"
+}
+
+###
+POST http://localhost:8090/id-card/decrypt HTTP/2
+content-type: application/json
+
+{
+  "id_card_no": "lwAuuM3jr6OjGCg3hxtd6uHAxuic3cov5QBbWrbPSNQ="
+}
