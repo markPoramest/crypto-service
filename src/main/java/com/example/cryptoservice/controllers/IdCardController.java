@@ -1,7 +1,7 @@
 package com.example.cryptoservice.controllers;
 
 import com.example.cryptoservice.dto.ErrorDTO;
-import com.example.cryptoservice.dto.IdCardDTO;
+import com.example.cryptoservice.dto.IdCard;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class IdCardController {
 
 
     @PostMapping("/encrypt")
-    public ResponseEntity<?> encrypt(@Valid @RequestBody IdCardDTO idCard) {
+    public ResponseEntity<?> encrypt(@Valid @RequestBody IdCard idCard) {
         try {
             String idCardNo = idCard.getIdCardNo();
 
@@ -55,7 +55,7 @@ public class IdCardController {
 
             String idCardEncrypted = Base64.getEncoder().encodeToString(encryptedData);
 
-            IdCardDTO idCardEncryptedDTO = new IdCardDTO();
+            IdCard idCardEncryptedDTO = new IdCard();
             idCardEncryptedDTO.setIdCardNo(idCardEncrypted);
 
             return new ResponseEntity<>(idCardEncryptedDTO, HttpStatus.OK);
@@ -68,7 +68,7 @@ public class IdCardController {
     }
 
     @PostMapping("/decrypt")
-    public ResponseEntity<?> decrypt(@Valid @RequestBody IdCardDTO idCard) {
+    public ResponseEntity<?> decrypt(@Valid @RequestBody IdCard idCard) {
         try {
             String idCardNo = idCard.getIdCardNo();
 
@@ -92,7 +92,7 @@ public class IdCardController {
 
             String idCardDecrypted = new String(decryptedText, "UTF-8");
 
-            IdCardDTO idCardDecryptedDTO = new IdCardDTO();
+            IdCard idCardDecryptedDTO = new IdCard();
             idCardDecryptedDTO.setIdCardNo(idCardDecrypted);
             return new ResponseEntity<>(idCardDecryptedDTO, HttpStatus.OK);
         } catch (Exception e) {

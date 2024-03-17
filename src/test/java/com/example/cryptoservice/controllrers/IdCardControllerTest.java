@@ -1,7 +1,7 @@
 package com.example.cryptoservice.controllrers;
 
 import com.example.cryptoservice.controllers.IdCardController;
-import com.example.cryptoservice.dto.IdCardDTO;
+import com.example.cryptoservice.dto.IdCard;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -30,26 +30,26 @@ class IdCardControllerTest {
     @Test
     void TestEncryptAndDecrypt() throws Exception {
         String idCardNo = "1100214356753";
-        IdCardDTO idCardDTO = new IdCardDTO(idCardNo);
+        IdCard idCard = new IdCard(idCardNo);
 
         ResultActions resultActions = mockMvc.perform(post("/id-card/encrypt")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(idCardDTO)))
+                        .content(objectMapper.writeValueAsString(idCard)))
                 .andExpect(status().isOk());
 
         String encrytedIdCard = resultActions.andReturn().getResponse().getContentAsString();
 
-        IdCardDTO idCardDTO1 = objectMapper.readValue(encrytedIdCard, IdCardDTO.class);
+        IdCard idCard1 = objectMapper.readValue(encrytedIdCard, IdCard.class);
 
         resultActions = mockMvc.perform(post("/id-card/decrypt")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(idCardDTO1)))
+                        .content(objectMapper.writeValueAsString(idCard1)))
                 .andExpect(status().isOk());
 
         String idCardNoDecrypted = resultActions.andReturn().getResponse().getContentAsString();
 
-        IdCardDTO idCardDecrypted = objectMapper.readValue(idCardNoDecrypted, IdCardDTO.class);
+        IdCard idCardDecrypted = objectMapper.readValue(idCardNoDecrypted, IdCard.class);
 
-        assert idCardDTO.equals(idCardDecrypted);
+        assert idCard.equals(idCardDecrypted);
     }
 }

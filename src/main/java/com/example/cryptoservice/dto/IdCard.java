@@ -11,7 +11,7 @@ import jakarta.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class IdCardDTO {
+public class IdCard {
     @NotBlank(message = "idCardNo cannot be blank")
     private String idCardNo;
 }
