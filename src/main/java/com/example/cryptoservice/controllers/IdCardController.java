@@ -1,6 +1,6 @@
 package com.example.cryptoservice.controllers;
 
-import com.example.cryptoservice.dto.ErrorDTO;
+import com.example.cryptoservice.dto.Error;
 import com.example.cryptoservice.dto.IdCard;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -60,7 +60,7 @@ public class IdCardController {
 
             return new ResponseEntity<>(idCardEncryptedDTO, HttpStatus.OK);
         } catch (Exception e) {
-            ErrorDTO error = new ErrorDTO();
+            Error error = new Error();
             error.setMessage(e.getMessage());
 
            return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -96,7 +96,7 @@ public class IdCardController {
             idCardDecryptedDTO.setIdCardNo(idCardDecrypted);
             return new ResponseEntity<>(idCardDecryptedDTO, HttpStatus.OK);
         } catch (Exception e) {
-            ErrorDTO error = new ErrorDTO();
+            Error error = new Error();
             error.setMessage(e.getMessage());
 
             return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
